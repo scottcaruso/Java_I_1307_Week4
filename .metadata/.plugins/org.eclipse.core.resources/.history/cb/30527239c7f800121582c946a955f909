@@ -1,0 +1,40 @@
+package com.scottcaruso.mygov;
+
+import com.scottcaruso.datafunctions.RetrieveDataFromSunlightLabs;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.util.Log;
+import android.view.Menu;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+
+public class MainActivity extends Activity {
+	
+	static LinearLayout mainLayout;
+	static LayoutParams mainLayoutParams;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        mainLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        mainLayout = new LinearLayout(this);
+        mainLayout.setOrientation(LinearLayout.VERTICAL);
+        
+        RetrieveDataFromSunlightLabs.retrieveData("http://congress.api.sunlightfoundation.com/legislators/locate?zip=11216&apikey=eab4e1dfef1e467b8a25ed1eab0f7544");
+        
+        
+        
+        setContentView(R.layout.activity_main);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    
+}

@@ -16,7 +16,7 @@ public class RetrieveDataFromSunlightLabs {
 	
 	static String response = "";
 	
-	public static String retrieveData(String urlString)
+	public static void retrieveData(String urlString)
 	{
 		URL dataURL;
 		try 
@@ -24,12 +24,12 @@ public class RetrieveDataFromSunlightLabs {
 			dataURL = new URL(urlString);
 			MakeRequest sunlightReq = new MakeRequest();
 			sunlightReq.execute(dataURL);
-			return response;	
+			//return response;	
 		} 
 		catch (MalformedURLException e) {
 			e.printStackTrace();
 		}	
-		return response;
+		//return response;
 	}
 	
 	public static String getResponse(URL url)
@@ -85,7 +85,7 @@ public class RetrieveDataFromSunlightLabs {
 		protected void onPostExecute(String result)
 		{
 
-			Log.i("URL_RESPONSE_ERROR",result);
+			Log.i("URL_RESPONSE",result);
 		}
 	}
 		
