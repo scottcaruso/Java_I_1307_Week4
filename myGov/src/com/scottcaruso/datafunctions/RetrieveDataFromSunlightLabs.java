@@ -84,8 +84,10 @@ public class RetrieveDataFromSunlightLabs {
 		@Override
 		protected void onPostExecute(String result)
 		{
-
-			Log.i("URL_RESPONSE",result);
+			JSONObject parsedObject = TurnStringIntoJSONObject.createMasterObject(result);
+			String parsedString = parsedObject.toString();
+			Log.i("Parsed:",parsedString);
+			//Log.i("URL_RESPONSE",result);
 		}
 	}
 		

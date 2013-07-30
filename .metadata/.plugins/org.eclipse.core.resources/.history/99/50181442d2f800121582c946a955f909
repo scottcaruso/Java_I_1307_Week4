@@ -1,0 +1,28 @@
+package com.scottcaruso.datafunctions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class TurnStringIntoJSONObject {
+	
+	public static JSONObject createMasterObject(String response)
+	{
+		JSONObject responseObject;
+		try {
+			responseObject = new JSONObject(response);
+			JSONArray resultsArray = responseObject.getJSONArray("results");
+			JSONObject politicians;
+			
+			
+			
+			return responseObject;
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+}

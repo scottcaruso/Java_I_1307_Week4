@@ -1,0 +1,44 @@
+package com.scottcaruso.datafunctions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class TurnStringIntoJSONObject {
+	
+	public static JSONObject createMasterObject(String response)
+	{
+		JSONObject responseObject;
+		try {
+			responseObject = new JSONObject(response);
+			JSONArray resultsArray = responseObject.getJSONArray("results");
+			JSONObject politicians;
+			JSONArray parsedPoliticians;
+			for (int x = 0; x < resultsArray.length(); x++)
+			{
+				JSONObject thisPol = resultsArray.getJSONObject(x);
+				String thisFirstName = thisPol.getString("first_name");
+				String thisLastName = thisPol.getString("last_name");
+				String thisTitle = thisPol.getString("title");
+				String fullName = thisTitle + ". " + thisFirstName + " " + thisLastName;
+				String thisID = thisPol.getString("bioguide_id");
+				String thisParty = thisPol.getString("party");
+				String thisState = thisPol.getString("state");
+				String termStarted = thisPol.getString("term_start");
+				String twitterHandle = thisPol.getString("twitter_id");
+				String thisWebsite = thisPol.getString("website");
+				
+			}
+			
+			
+			
+			return responseObject;
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+}

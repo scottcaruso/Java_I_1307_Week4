@@ -1,0 +1,13 @@
+package com.scottcaruso.datafunctions;
+
+import org.json.JSONObject;
+
+public class TurnStringIntoJSONObject {
+	
+	public static JSONObject createSingleObject(String response)
+	{
+		JSONObject responseObject = new JSONObject(response);
+		
+	}
+
+}
