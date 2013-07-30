@@ -1,0 +1,12 @@
+package com.scottcaruso.interfacefunctions;
+
+import org.json.JSONObject;
+
+public class DisplayPoliticianResults {
+
+	public static void showPoliticiansInMainView(JSONObject pols)
+	{
+		JSONArray polsToDisplay = pols.getJSONArray("politicians");
+	}
+
+}

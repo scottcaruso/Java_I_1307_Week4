@@ -79,8 +79,7 @@ public class RetrieveDataFromSunlightLabs {
 			for(URL url: urls)
 			{
 				response = RetrieveDataFromSunlightLabs.getResponse(url);
-				
-				
+				LinearLayout currentMainLayout = MainActivity.getMainLayout();
 			}
 			
 			return response;

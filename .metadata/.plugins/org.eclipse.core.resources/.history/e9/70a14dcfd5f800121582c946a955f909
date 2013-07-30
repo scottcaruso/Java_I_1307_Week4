@@ -8,11 +8,8 @@ import java.net.URLConnection;
 
 import org.json.JSONObject;
 
-import com.scottcaruso.mygov.MainActivity;
-
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.LinearLayout;
 
 public class RetrieveDataFromSunlightLabs {
 
@@ -79,8 +76,6 @@ public class RetrieveDataFromSunlightLabs {
 			for(URL url: urls)
 			{
 				response = RetrieveDataFromSunlightLabs.getResponse(url);
-				
-				
 			}
 			
 			return response;

@@ -5,7 +5,6 @@ import com.scottcaruso.interfacefunctions.UIElementCreator;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -23,9 +22,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        //Allows the context to be passed across classes.
-        setCurrentContext(MainActivity.this);
         
         mainLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         mainLayout = new LinearLayout(this);
@@ -57,16 +53,6 @@ public class MainActivity extends Activity {
 
 	public static void setMainLayout(LinearLayout mainLayout) {
 		MainActivity.mainLayout = mainLayout;
-	}
-	
-	public static void setCurrentContext (Context context)
-	{
-		currentContext = context;
-	}
-	
-	public static Context getCurrentContext ()
-	{
-		return currentContext;
 	}
 
 

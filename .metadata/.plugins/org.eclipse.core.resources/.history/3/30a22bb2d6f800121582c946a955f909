@@ -1,0 +1,28 @@
+package com.scottcaruso.interfacefunctions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.widget.LinearLayout;
+
+import com.scottcaruso.mygov.MainActivity;
+
+public class DisplayPoliticianResults {
+
+	public static void showPoliticiansInMainView(JSONObject pols)
+	{
+		try {
+			JSONArray polsToDisplay = pols.getJSONArray("politicians");
+			LinearLayout currentMainLayout = MainActivity.getMainLayout();
+			LinearLayout thisPolitician = new LinearLayout(MainActivity.getCurrentContext());
+			
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+}

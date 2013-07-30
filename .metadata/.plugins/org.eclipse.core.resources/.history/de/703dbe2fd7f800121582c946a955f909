@@ -1,0 +1,35 @@
+package com.scottcaruso.interfacefunctions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.scottcaruso.mygov.MainActivity;
+
+public class DisplayPoliticianResults {
+
+	public static void showPoliticiansInMainView(JSONObject pols)
+	{
+		try {
+			JSONArray polsToDisplay = pols.getJSONArray("politicians");
+			LinearLayout currentMainLayout = MainActivity.getMainLayout();
+			Context currentMainContext = MainActivity.getCurrentContext();
+			for (int x = 0; x < polsToDisplay.length(); x++)
+			{
+				LinearLayout thisPoliticianName = new LinearLayout(currentMainContext);
+				JSONObject thisPol = polsToDisplay.getJSONObject(x);
+				static TextView polName = UIElementCreator.createLabel(currentMainContext,thisPol.getString("Name"));
+			}
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+}
