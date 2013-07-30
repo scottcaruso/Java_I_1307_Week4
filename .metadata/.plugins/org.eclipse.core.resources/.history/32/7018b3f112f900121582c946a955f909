@@ -22,7 +22,6 @@ public class DisplayPoliticianResults {
 			for (int x = 0; x < polsToDisplay.length(); x++)
 			{
 				LinearLayout thisPoliticianName = new LinearLayout(currentMainContext);
-				thisPoliticianName.setOrientation(LinearLayout.VERTICAL);
 				JSONObject thisPol = polsToDisplay.getJSONObject(x);
 				final TextView polLabel = UIElementCreator.createLabel(currentMainContext, "Politician Name: ");
 				final TextView polPartyLabel = UIElementCreator.createLabel(currentMainContext, "Party Affiliaition: ");

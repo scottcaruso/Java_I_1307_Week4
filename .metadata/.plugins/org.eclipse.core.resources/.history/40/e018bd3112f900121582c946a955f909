@@ -17,12 +17,10 @@ public class DisplayPoliticianResults {
 		try {
 			JSONArray polsToDisplay = pols.getJSONArray("politicians");
 			LinearLayout currentMainLayout = MainActivity.getMainLayout();
-			currentMainLayout.removeAllViews();
 			Context currentMainContext = MainActivity.getCurrentContext();
 			for (int x = 0; x < polsToDisplay.length(); x++)
 			{
 				LinearLayout thisPoliticianName = new LinearLayout(currentMainContext);
-				thisPoliticianName.setOrientation(LinearLayout.VERTICAL);
 				JSONObject thisPol = polsToDisplay.getJSONObject(x);
 				final TextView polLabel = UIElementCreator.createLabel(currentMainContext, "Politician Name: ");
 				final TextView polPartyLabel = UIElementCreator.createLabel(currentMainContext, "Party Affiliaition: ");
@@ -63,19 +61,7 @@ public class DisplayPoliticianResults {
 				twitterLayout.addView(polTwitterLabel);
 				twitterLayout.addView(polTwitter);
 				
-				LinearLayout websiteLayout = new LinearLayout(currentMainContext);
-				websiteLayout.setOrientation(LinearLayout.HORIZONTAL);
-				websiteLayout.addView(polWebsiteLabel);
-				websiteLayout.addView(polWebsite);
-				
-				thisPoliticianName.addView(nameLayout);
-				thisPoliticianName.addView(partyLayout);
-				thisPoliticianName.addView(stateLayout);
-				thisPoliticianName.addView(termLayout);
-				thisPoliticianName.addView(twitterLayout);
-				thisPoliticianName.addView(websiteLayout);
-
-				currentMainLayout.addView(thisPoliticianName);
+				//FINISH THIS
 			}
 			
 		} catch (JSONException e) {
