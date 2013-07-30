@@ -1,0 +1,3 @@
+1375152896846	Rename method 'retrieveCloudantData'
+1375152956834	Rename type 'CloudantRequest'
+1375153017340	Rename local variable 'cloudReq'

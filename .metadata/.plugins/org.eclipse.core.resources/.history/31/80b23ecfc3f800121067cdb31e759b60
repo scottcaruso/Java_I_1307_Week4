@@ -1,0 +1,143 @@
+package com.scottcaruso.datafunctions;
+
+import java.net.URL;
+
+import android.os.AsyncTask;
+
+public class RetrieveDataFromSunlightLabs {
+
+	
+	static String response = "";
+	
+	public static String retrieveData(String urlString)
+	{
+		URL dataURL;
+		try 
+		{
+			dataURL = new URL(urlString);
+			MakeRequest sunlightReq = new MakeRequest();
+			sunlightReq.execute(dataURL);
+			return response;	
+		} 
+		catch (MalformedURLException e) {
+			e.printStackTrace();
+		}	
+		return response;
+	}
+	
+	public static String getResponse(URL url)
+	{
+
+		try 
+		{
+			URLConnection connection = url.openConnection();
+			Log.e("Error", String.valueOf(connection));
+			BufferedInputStream bin = null;
+			try {
+				bin = new BufferedInputStream(connection.getInputStream());
+			} catch (Exception e) {
+				Log.e("Error","Failed at BufferedInputStream");
+				e.printStackTrace();
+			}
+			
+			byte[] contentBytes = new byte[1024];
+			int bytesRead = 0;
+			StringBuffer responseBuffer = new StringBuffer();
+			
+			while((bytesRead = bin.read(contentBytes)) != -1)
+			{
+				response = new String(contentBytes,0,bytesRead);
+				responseBuffer.append(response);
+			}
+			
+			return responseBuffer.toString();
+		
+		} catch (IOException e) {
+			Log.e("Error", "getURLStringResponse");
+			e.printStackTrace();
+		}
+	
+		return response;
+	}
+	
+	private static class MakeRequest extends AsyncTask<URL, Void, String>
+	{
+		@Override
+		protected String doInBackground(URL... urls)
+		{
+			String response = "";
+			for(URL url: urls)
+			{
+				response = RetrieveData.getResponse(url);
+			}
+			
+			return response;
+		}
+		
+		@Override
+		protected void onPostExecute(String result)
+		{
+			try 
+			{
+				//First, we compare what was entered in the MainActivity to the response from Cloudant to confirm that the user exists.
+				JSONObject thisObject = new JSONObject (result);
+				JSONArray rows = thisObject.getJSONArray("rows");
+				int numberOfItems = rows.length();
+				for (int x = 0; x < numberOfItems; x++)
+				{
+					String thisJson = rows.getJSONObject(x).getString("doc");
+					String nameString = rows.getJSONObject(x).getJSONObject("doc").getString("username");
+					
+					//Then, if the user does, we call the methods to display his stats to the MainActivity.
+					if (nameString.compareTo(MainActivity.getTextThatWasEntered()) == 0)
+					{
+						MainActivity.setResultText(thisJson);
+						CreateDisplay statDisplay = new CreateDisplay(MainActivity.getCurrentContext());
+						MainActivity.updateView(statDisplay);
+						break;
+					}
+					//Or, if we reach the end and find no match, we provide an appropriate dialog with options. Create New has not been configured.
+					if (x == numberOfItems-1)
+					{
+						Context currentContext = MainActivity.getCurrentContext();
+						final LinearLayout mainLayout = new LinearLayout(MainActivity.getCurrentContext());
+						mainLayout.removeAllViews();
+						final TextView userDoesntExist = UIElementCreator.createLabel(currentContext, "User "+MainActivity.getTextThatWasEntered()+" could not be found. Would you like to create a new entry or search again?");
+						final Button createNewUser = UIElementCreator.createButton(currentContext, "Create New", 1);
+						final Button searchAgain = UIElementCreator.createButton(currentContext, "Search Again", 2);
+						mainLayout.addView(userDoesntExist);
+						mainLayout.addView(createNewUser);
+						mainLayout.addView(searchAgain);
+						createNewUser.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) 
+							{
+								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "Adding new documents to Cloudant is not yet configured! Try again next week.", Toast.LENGTH_SHORT);
+								toast.show();	
+							}
+						});
+						searchAgain.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) 
+							{
+								mainLayout.removeAllViews();
+								mainLayout.addView(MainActivity.getUserName());
+						        mainLayout.addView(MainActivity.getSearchForUserName());
+							}
+						});	
+
+				    mainLayout.setOrientation(LinearLayout.VERTICAL);
+					MainActivity.updateView(mainLayout);
+					}
+				}
+			} catch (JSONException e) 
+			{
+				e.printStackTrace();
+			}
+			Log.i("URL_RESPONSE_ERROR",result);
+		}
+	}
+		
+}
