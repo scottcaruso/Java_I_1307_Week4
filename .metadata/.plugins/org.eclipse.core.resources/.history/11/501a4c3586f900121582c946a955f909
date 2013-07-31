@@ -1,0 +1,18 @@
+package com.scottcaruso.datafunctions;
+
+import org.json.JSONObject;
+
+public class SaveFavoritesLocally {
+	
+	public static void saveObject(JSONObject thisPol)
+	{
+		
+	}
+
+	public static JSONObject retrieveObjects()
+	{
+		
+		return JSONObject
+	}
+	
+}

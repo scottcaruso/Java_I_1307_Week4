@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
         mainLayout = new LinearLayout(this);
         mainLayout.setOrientation(LinearLayout.VERTICAL);
         
-        final EditText zipEntry = UIElementCreator.createTextEntryField(this, "Enter Zip Code");
+        final EditText zipEntry = UIElementCreator.createTextEntryField(this, "Enter Any U.S. Zip Code");
         final Button searchForPolsButton = UIElementCreator.createButton(this, "Search for Politicians", 1);
         
         searchForPolsButton.setOnClickListener(new View.OnClickListener() {

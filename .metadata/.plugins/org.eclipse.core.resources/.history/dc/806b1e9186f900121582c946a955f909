@@ -1,0 +1,20 @@
+package com.scottcaruso.datafunctions;
+
+import org.json.JSONObject;
+
+import android.content.Context;
+
+public class SaveFavoritesLocally {
+	
+	public static void saveObject(Context context, JSONObject thisPol, Boolean external)
+	{
+		
+	}
+
+	public static JSONObject retrieveObjects()
+	{
+		
+		return null;
+	}
+	
+}

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 
 import org.json.JSONObject;
 
@@ -13,7 +14,6 @@ import com.scottcaruso.mygov.MainActivity;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.LinearLayout;
 
 public class RetrieveDataFromSunlightLabs {
 
@@ -92,6 +92,9 @@ public class RetrieveDataFromSunlightLabs {
 		{
 			JSONObject parsedObject = TurnStringIntoJSONObject.createMasterObject(result);
 			DisplayPoliticianResults.showPoliticiansInMainView(parsedObject);
+			HashMap<String, String> polData = new HashMap<String, String>();
+			polData.put("Politicians", parsedObject.toString());
+			SaveFavoritesLocally.saveObject(MainActivity.getCurrentContext(), "Test", polData, true);
 			//Log.i("URL_RESPONSE",result);
 		}
 	}
