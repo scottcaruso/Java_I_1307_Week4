@@ -93,8 +93,8 @@ public class RetrieveDataFromSunlightLabs {
 			JSONObject parsedObject = TurnStringIntoJSONObject.createMasterObject(result);
 			DisplayPoliticianResults.showPoliticiansInMainView(parsedObject);
 			HashMap<String, String> polData = new HashMap<String, String>();
-			//polData.put("Politicians", parsedObject.toString());
-			//SaveFavoritesLocally.saveObject(MainActivity.getCurrentContext(), "Test", polData, true);
+			polData.put("Politicians", parsedObject.toString());
+			SaveFavoritesLocally.saveObject(MainActivity.getCurrentContext(), "Test", polData, true);
 			//Log.i("URL_RESPONSE",result);
 		}
 	}

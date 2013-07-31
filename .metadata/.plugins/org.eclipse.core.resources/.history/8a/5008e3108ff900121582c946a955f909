@@ -1,18 +1,14 @@
 package com.scottcaruso.interfacefunctions;
 
-import java.util.HashMap;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.scottcaruso.datafunctions.SaveFavoritesLocally;
 import com.scottcaruso.mygov.MainActivity;
 
 public class DisplayPoliticianResults {
@@ -28,7 +24,7 @@ public class DisplayPoliticianResults {
 			{
 				LinearLayout thisPoliticianName = new LinearLayout(currentMainContext);
 				thisPoliticianName.setOrientation(LinearLayout.VERTICAL);
-				final JSONObject thisPol = polsToDisplay.getJSONObject(x);
+				JSONObject thisPol = polsToDisplay.getJSONObject(x);
 				final TextView polLabel = UIElementCreator.createLabel(currentMainContext, "Politician Name: ");
 				final TextView polPartyLabel = UIElementCreator.createLabel(currentMainContext, "Party Affiliaition: ");
 				final TextView polStateLabel = UIElementCreator.createLabel(currentMainContext, "From State: ");
@@ -74,21 +70,6 @@ public class DisplayPoliticianResults {
 				websiteLayout.addView(polWebsite);
 				
 				Button saveAsFavorite = UIElementCreator.createButton(currentMainContext, "Save Politician As Favorite", x);
-				
-				saveAsFavorite.setOnClickListener(new View.OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						HashMap<String, String> polData = new HashMap<String, String>();
-						try {
-							polData.put(thisPol.getString("Name"), thisPol.toString());
-							SaveFavoritesLocally.saveObject(MainActivity.getCurrentContext(), thisPol.getString("Name"), polData, true);
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
 				
 				thisPoliticianName.addView(nameLayout);
 				thisPoliticianName.addView(partyLayout);
