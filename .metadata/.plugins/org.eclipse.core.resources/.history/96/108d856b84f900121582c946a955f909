@@ -69,7 +69,7 @@ public class DisplayPoliticianResults {
 				websiteLayout.addView(polWebsiteLabel);
 				websiteLayout.addView(polWebsite);
 				
-				Button saveAsFavorite = UIElementCreator.createButton(currentMainContext, "Save Politician As Favorite", x);
+				Button saveAsFavorite = UIElementCreator.createButton(currentMainContext, "Save Politician", x);
 				
 				thisPoliticianName.addView(nameLayout);
 				thisPoliticianName.addView(partyLayout);
