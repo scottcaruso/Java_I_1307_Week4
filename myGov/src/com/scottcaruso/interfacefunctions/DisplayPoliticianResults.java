@@ -81,7 +81,7 @@ public class DisplayPoliticianResults {
 					public void onClick(View v) {
 						HashMap<String, String> polData = new HashMap<String, String>();
 						try {
-							polData.put(thisPol.getString("Name"), thisPol.toString());
+							polData.put("Politician", thisPol.toString());
 							SaveFavoritesLocally.saveObject(MainActivity.getCurrentContext(), thisPol.getString("Name"), polData, true);
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block

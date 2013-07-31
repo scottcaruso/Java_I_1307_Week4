@@ -1,6 +1,9 @@
 package com.scottcaruso.mygov;
 
+import java.util.HashMap;
+
 import com.scottcaruso.datafunctions.RetrieveDataFromSunlightLabs;
+import com.scottcaruso.datafunctions.SaveFavoritesLocally;
 import com.scottcaruso.interfacefunctions.UIElementCreator;
 
 import android.os.Bundle;
@@ -43,8 +46,25 @@ public class MainActivity extends Activity {
 			}
 		});
         
+        final Button retrieveSavedPols = UIElementCreator.createButton(this, "Retrieve Favorites", 1);
+        retrieveSavedPols.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				HashMap <String, String> savedPols = SaveFavoritesLocally.getSavedPols();
+				String thisPol;
+				try {
+					thisPol = savedPols.get("Politician").toString();
+					Log.i("Test:",thisPol);	
+				} catch (Exception e) {
+					Log.i("Test:","No valid politicans found.");		
+				}
+			}
+		});
+        
         mainLayout.addView(zipEntry);
         mainLayout.addView(searchForPolsButton);
+        mainLayout.addView(retrieveSavedPols);
        
         setContentView(mainLayout);
     }
