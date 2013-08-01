@@ -7,11 +7,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.scottcaruso.datafunctions.RetrieveDataFromSunlightLabs;
 import com.scottcaruso.datafunctions.SaveFavoritesLocally;
 import com.scottcaruso.mygov.MainActivity;
 
@@ -79,14 +81,23 @@ public class DisplayPoliticianResults {
 					
 					@Override
 					public void onClick(View v) {
-						HashMap<String, String> polData = new HashMap<String, String>();
+						JSONArray dataArray = new JSONArray();
+						JSONObject polObject;
+						JSONObject masterObject = new JSONObject();
 						try {
-							polData.put("Politician", thisPol.toString());
-							SaveFavoritesLocally.saveObject(MainActivity.getCurrentContext(), thisPol.getString("Name"), polData, true);
+							polObject = new JSONObject(thisPol.toString());
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
+							polObject = null;
 							e.printStackTrace();
 						}
+						dataArray.put(polObject);
+						try {
+							masterObject.put("Politicians", dataArray);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+						String masterObjectString = masterObject.toString();
+						SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
 					}
 				});
 				

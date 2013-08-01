@@ -1,0 +1,126 @@
+package com.scottcaruso.datafunctions;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectOutputStream.PutField;
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.scottcaruso.mygov.MainActivity;
+
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
+public class SaveFavoritesLocally {
+		
+	@SuppressWarnings("resource")
+	public static Boolean saveData(Context context, String filename, String polToSave, Boolean external)
+	{
+		try {
+			File file;
+			FileOutputStream fos;
+			if (external)
+			{
+				file = new File(context.getExternalFilesDir(null), filename);
+				fos = new FileOutputStream(file);
+			} else
+			{
+				fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
+			}
+			fos.write(polToSave.getBytes());
+			fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	
+}
+
+	@SuppressWarnings("resource")
+	public static String retrieveSavedString(Context context, String filename, Boolean external)
+	{
+		String savedData = "";
+		try
+		{
+			File file;
+			FileInputStream fis;
+			if (external)
+			{
+				file = new File(context.getExternalFilesDir(null), filename);
+				fis = new FileInputStream(file);
+			} else
+			{
+				file = new File(filename);
+				fis = context.openFileInput(filename);
+			}
+			BufferedInputStream bin = new BufferedInputStream(fis);
+			byte[] contentSize = new byte[1024];
+			int bytesRead = 0;
+			StringBuffer contentBuffer = new StringBuffer();
+			
+			while ((bytesRead = bin.read(contentSize)) != -1)
+			{
+				savedData = new String(contentSize,0,bytesRead);
+				contentBuffer.append(savedData);
+			}
+			savedData = contentBuffer.toString();
+
+	return savedData;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static HashMap<String, String> getSavedPols()
+	{
+		Object storedObject = SaveFavoritesLocally.retrieveSavedObject(MainActivity.getCurrentContext(), "Politicians", false);
+		HashMap<String, String> data;
+		if (storedObject != null)
+		{
+			data = (HashMap<String, String>)storedObject;
+		} else
+		{
+			/*if (fromMain)
+			{
+				Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "No Politicians Saved", Toast.LENGTH_LONG);
+				toast.show();
+			}*/
+			data = new HashMap<String, String>();
+			return null;
+		}
+		return data;
+	}
+	
+	public static Boolean determineIfAlreadySaved(JSONObject politician)
+	{
+		HashMap <String, String> savedPols = SaveFavoritesLocally.getSavedPols();
+		String thisPol;
+		try {
+			thisPol = politician.getString("Name");
+			//JSONObject savedPolObject = new JSONObject(thisPol);
+		} catch (Exception e) {
+			Log.i("Test:","No politicans found.");		
+		}
+		String savedPolsString;
+		if (savedPols == null)
+		{
+			return false;
+		}
+		savedPolsString = savedPols.get("Politicians");
+		if (savedPolsString == null)
+		{
+			return false;
+		}
+		return true;
+	}
+	
+}

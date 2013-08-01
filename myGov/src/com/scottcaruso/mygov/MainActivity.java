@@ -1,7 +1,5 @@
 package com.scottcaruso.mygov;
 
-import java.util.HashMap;
-
 import com.scottcaruso.datafunctions.RetrieveDataFromSunlightLabs;
 import com.scottcaruso.datafunctions.SaveFavoritesLocally;
 import com.scottcaruso.interfacefunctions.DisplayPoliticianResults;
@@ -62,7 +60,8 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Boolean saved = SaveFavoritesLocally.determineIfAlreadySaved();
+				String savedData  = SaveFavoritesLocally.getSavedPols();
+				Log.i("Saved Data",savedData);
 			}
 		});
         

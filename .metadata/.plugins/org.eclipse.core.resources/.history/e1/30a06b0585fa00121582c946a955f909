@@ -1,0 +1,122 @@
+package com.scottcaruso.interfacefunctions;
+
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.scottcaruso.datafunctions.RetrieveDataFromSunlightLabs;
+import com.scottcaruso.datafunctions.SaveFavoritesLocally;
+import com.scottcaruso.mygov.MainActivity;
+
+public class DisplayPoliticianResults {
+
+	public static void showPoliticiansInMainView(JSONObject pols)
+	{
+		try {
+			JSONArray polsToDisplay = pols.getJSONArray("politicians");
+			LinearLayout currentMainLayout = MainActivity.getMainLayout();
+			currentMainLayout.removeAllViews();
+			Context currentMainContext = MainActivity.getCurrentContext();
+			for (int x = 0; x < polsToDisplay.length(); x++)
+			{
+				LinearLayout thisPoliticianName = new LinearLayout(currentMainContext);
+				thisPoliticianName.setOrientation(LinearLayout.VERTICAL);
+				final JSONObject thisPol = polsToDisplay.getJSONObject(x);
+				final TextView polLabel = UIElementCreator.createLabel(currentMainContext, "Politician Name: ");
+				final TextView polPartyLabel = UIElementCreator.createLabel(currentMainContext, "Party Affiliaition: ");
+				final TextView polStateLabel = UIElementCreator.createLabel(currentMainContext, "From State: ");
+				final TextView polTermLabel = UIElementCreator.createLabel(currentMainContext, "Term Started: ");
+				final TextView polTwitterLabel = UIElementCreator.createLabel(currentMainContext, "Twitter Handle: ");
+				final TextView polWebsiteLabel = UIElementCreator.createLabel(currentMainContext, "Website Address: ");
+				
+				final TextView polName = UIElementCreator.createLabel(currentMainContext,thisPol.getString("Name"));
+				final TextView polParty = UIElementCreator.createLabel(currentMainContext, thisPol.getString("Party"));
+				final TextView polState = UIElementCreator.createLabel(currentMainContext, thisPol.getString("State"));
+				final TextView polTerm = UIElementCreator.createLabel(currentMainContext, thisPol.getString("Term Start"));
+				final TextView polTwitter = UIElementCreator.createLabel(currentMainContext, thisPol.getString("Twitter"));
+				final TextView polWebsite = UIElementCreator.createLabel(currentMainContext, thisPol.getString("Website"));
+				
+				LinearLayout nameLayout = new LinearLayout(currentMainContext);
+				nameLayout.setOrientation(LinearLayout.HORIZONTAL);
+				nameLayout.addView(polLabel);
+				nameLayout.addView(polName);
+				
+				LinearLayout partyLayout = new LinearLayout(currentMainContext);
+				partyLayout.setOrientation(LinearLayout.HORIZONTAL);
+				partyLayout.addView(polPartyLabel);
+				partyLayout.addView(polParty);
+				
+				LinearLayout stateLayout = new LinearLayout(currentMainContext);
+				stateLayout.setOrientation(LinearLayout.HORIZONTAL);
+				stateLayout.addView(polStateLabel);
+				stateLayout.addView(polState);
+				
+				LinearLayout termLayout = new LinearLayout(currentMainContext);
+				termLayout.setOrientation(LinearLayout.HORIZONTAL);
+				termLayout.addView(polTermLabel);
+				termLayout.addView(polTerm);
+				
+				LinearLayout twitterLayout = new LinearLayout(currentMainContext);
+				twitterLayout.setOrientation(LinearLayout.HORIZONTAL);
+				twitterLayout.addView(polTwitterLabel);
+				twitterLayout.addView(polTwitter);
+				
+				LinearLayout websiteLayout = new LinearLayout(currentMainContext);
+				websiteLayout.setOrientation(LinearLayout.HORIZONTAL);
+				websiteLayout.addView(polWebsiteLabel);
+				websiteLayout.addView(polWebsite);
+				
+				Button saveAsFavorite = UIElementCreator.createButton(currentMainContext, "Save Politician As Favorite", x);
+				
+				saveAsFavorite.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						JSONArray dataArray = new JSONArray();
+						JSONObject polObject;
+						JSONObject masterObject = new JSONObject();
+						try {
+							polObject = new JSONObject(thisPol.toString());
+						} catch (JSONException e) {
+							polObject = null;
+							e.printStackTrace();
+						}
+						dataArray.put(polObject);
+						try {
+							masterObject.put("Politicians", dataArray);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+						String masterObjectString = masterObject.toString();
+						SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", newString, false);
+					}
+				});
+				
+				thisPoliticianName.addView(nameLayout);
+				thisPoliticianName.addView(partyLayout);
+				thisPoliticianName.addView(stateLayout);
+				thisPoliticianName.addView(termLayout);
+				thisPoliticianName.addView(twitterLayout);
+				thisPoliticianName.addView(websiteLayout);
+				thisPoliticianName.addView(saveAsFavorite);
+
+				currentMainLayout.addView(thisPoliticianName);
+			}
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+}
