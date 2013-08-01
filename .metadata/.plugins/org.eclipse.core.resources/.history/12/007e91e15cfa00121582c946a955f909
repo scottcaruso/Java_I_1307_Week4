@@ -15,9 +15,17 @@ public class TurnStringIntoJSONObject {
 		JSONObject responseObject;
 		try {
 			responseObject = new JSONObject(response);
-			JSONArray resultsArray = responseObject.getJSONArray("results");
-			if (resultsArray.length() == 0)
+			JSONArray resultsArray;
+			try {
+				resultsArray = responseObject.getJSONArray("results");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (resultsArray.isNull(0))
 			{
+				Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "You have entered an invalid zip code. Please try again.", Toast.LENGTH_LONG);
+				toast.show();
 				return null;
 			} else
 			{

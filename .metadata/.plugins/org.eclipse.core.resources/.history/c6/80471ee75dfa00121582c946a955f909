@@ -96,9 +96,9 @@ public class RetrieveDataFromSunlightLabs {
 				toast.show();
 			} else
 			{
-				DisplayPoliticianResults.showPoliticiansInMainView(parsedObject);
+				diplayPoliticianResults.showPoliticiansInMainView(parsedObject);
+				HashMap<String, String> polData = new HashMap<String, String>();
 			}
-			//HashMap<String, String> polData = new HashMap<String, String>();
 			//polData.put("Politicians", parsedObject.toString());
 			//SaveFavoritesLocally.saveObject(MainActivity.getCurrentContext(), "Test", polData, true);
 			//Log.i("URL_RESPONSE",result);

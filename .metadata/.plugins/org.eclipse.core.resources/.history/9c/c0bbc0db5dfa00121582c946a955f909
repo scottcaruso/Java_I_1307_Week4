@@ -14,7 +14,6 @@ import com.scottcaruso.mygov.MainActivity;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 public class RetrieveDataFromSunlightLabs {
 
@@ -90,15 +89,8 @@ public class RetrieveDataFromSunlightLabs {
 		protected void onPostExecute(String result)
 		{
 			JSONObject parsedObject = TurnStringIntoJSONObject.createMasterObject(result);
-			if (parsedObject == null)
-			{
-				Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "You have entered an invalid zip code. Please try again.", Toast.LENGTH_LONG);
-				toast.show();
-			} else
-			{
-				DisplayPoliticianResults.showPoliticiansInMainView(parsedObject);
-			}
-			//HashMap<String, String> polData = new HashMap<String, String>();
+			DisplayPoliticianResults.showPoliticiansInMainView(parsedObject);
+			HashMap<String, String> polData = new HashMap<String, String>();
 			//polData.put("Politicians", parsedObject.toString());
 			//SaveFavoritesLocally.saveObject(MainActivity.getCurrentContext(), "Test", polData, true);
 			//Log.i("URL_RESPONSE",result);

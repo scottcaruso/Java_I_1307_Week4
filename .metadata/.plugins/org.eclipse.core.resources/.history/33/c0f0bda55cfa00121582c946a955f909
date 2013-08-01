@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
 			}
 		});
         
-        final Button retrieveSavedPols = UIElementCreator.createButton(this, "Retrieve Saved Politicians", 1);
+        final Button retrieveSavedPols = UIElementCreator.createButton(this, "Retrieve Favorites", 1);
         retrieveSavedPols.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
