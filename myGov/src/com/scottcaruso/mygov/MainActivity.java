@@ -60,8 +60,14 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				String savedData  = SaveFavoritesLocally.getSavedPols();
-				Log.i("Saved Data",savedData);
+				String savedData;
+				try {
+					savedData = SaveFavoritesLocally.getSavedPols();
+					Log.i("Saved Data",savedData);
+				} catch (Exception e) {
+					Toast toast = Toast.makeText(MainActivity.this, "There are no politicians saved to storage.", Toast.LENGTH_LONG);
+					toast.show();
+				}
 			}
 		});
         

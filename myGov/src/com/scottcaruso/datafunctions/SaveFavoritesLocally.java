@@ -83,7 +83,6 @@ public class SaveFavoritesLocally {
 			Log.e("Error:", "I/O error.");
 			return null;
 		}
-
 	return savedData;
 	}
 	
@@ -101,10 +100,41 @@ public class SaveFavoritesLocally {
 		}
 	}
 	
-	public static Boolean determineIfAlreadySaved(JSONObject politician)
+	public static Boolean determineIfAlreadySaved(String politicians, String polName)
 	{
-
-		return true;
+		try {
+			JSONObject savedObject = new JSONObject(politicians);
+			JSONArray savedPols = savedObject.getJSONArray("Politicians");
+			for (int x = 0; x < savedPols.length(); x++)
+			{
+				JSONObject currentPol = savedPols.getJSONObject(x);
+				String currentName = currentPol.getString("Name");
+				if (currentName.equals(polName))
+				{
+					return true;
+				}
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
+	public static String appendNewDataToExistingString(String oldData, String newData)
+	{
+		try {
+			JSONObject oldObject = new JSONObject(oldData);
+			JSONArray oldArray = oldObject.getJSONArray("Politicians");
+			JSONObject newDataObject = new JSONObject(newData);
+			oldArray.put(newDataObject);
+			JSONObject newObject = new JSONObject();
+			newObject.put("Politicians", oldArray);
+			String newString = newObject.toString();
+			return newString;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return oldData;
+		}	
+	}
 }

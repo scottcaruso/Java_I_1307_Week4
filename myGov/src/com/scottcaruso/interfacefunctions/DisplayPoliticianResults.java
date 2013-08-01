@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.scottcaruso.datafunctions.RetrieveDataFromSunlightLabs;
 import com.scottcaruso.datafunctions.SaveFavoritesLocally;
@@ -81,23 +82,45 @@ public class DisplayPoliticianResults {
 					
 					@Override
 					public void onClick(View v) {
-						JSONArray dataArray = new JSONArray();
-						JSONObject polObject;
-						JSONObject masterObject = new JSONObject();
-						try {
-							polObject = new JSONObject(thisPol.toString());
-						} catch (JSONException e) {
-							polObject = null;
-							e.printStackTrace();
+						String savedData  = SaveFavoritesLocally.getSavedPols();
+						String masterObjectString = "";
+						if (savedData == null)
+						{
+							JSONArray dataArray = new JSONArray();
+							JSONObject polObject;
+							JSONObject masterObject = new JSONObject();
+							try {
+								polObject = new JSONObject(thisPol.toString());
+							} catch (JSONException e) {
+								polObject = null;
+								e.printStackTrace();
+							}
+							dataArray.put(polObject);
+							try {
+								masterObject.put("Politicians", dataArray);
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+							masterObjectString = masterObject.toString();
+							SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
+						} else
+						{
+							Boolean isThisItemAlreadySaved = false;
+							try {
+								isThisItemAlreadySaved = SaveFavoritesLocally.determineIfAlreadySaved(savedData,thisPol.getString("Name"));
+							} catch (JSONException e1) {
+								e1.printStackTrace();
+							}
+							if (isThisItemAlreadySaved)
+							{
+								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "You have already saved this politician!", Toast.LENGTH_LONG);
+								toast.show();
+							} else
+							{
+								masterObjectString = SaveFavoritesLocally.appendNewDataToExistingString(savedData, thisPol.toString());
+								SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
+							}
 						}
-						dataArray.put(polObject);
-						try {
-							masterObject.put("Politicians", dataArray);
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-						String masterObjectString = masterObject.toString();
-						SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
 					}
 				});
 				
