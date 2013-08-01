@@ -1,0 +1,21 @@
+package com.scottcaruso.datafunctions;
+
+public enum yearsLeftInTerm {
+	SENATOR(6),
+	REPRESENTATIVE(2
+	
+	private final int numberOfYears;
+	
+	Total_Bases(int value)
+	{
+		this.numberOfBases = value;
+	}
+	
+	public static int totalBases(int hits, int doubles, int triples, int homeruns)
+	{
+		int singles = (hits-doubles-triples-homeruns);	
+		int totalBases = singles + (doubles*DOUBLE.numberOfBases) + (triples*TRIPLE.numberOfBases) + (homeruns*HOMERUN.numberOfBases);
+		
+		return totalBases;
+	}
+}

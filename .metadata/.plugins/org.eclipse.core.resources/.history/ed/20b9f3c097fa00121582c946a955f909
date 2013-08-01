@@ -1,0 +1,25 @@
+package com.scottcaruso.datafunctions;
+
+public enum yearsLeftInTerm {
+	REPRESENTATIVE(2),
+	SENATOR(6);
+	
+	private final int numberOfYears;
+	
+	void Years_In_Term(int value)
+	{
+		this.numberOfYears = value;
+	}
+	
+	public static int yearsLeft(int yearTookOffice, int currentYear, String role)
+	{
+		if (role.equals("Representative"))
+		{
+			int yearsServed = currentYear - yearTookOffice;
+			int yearsLeft = REPRESENTATIVE.numberOfYears - yearsServed;
+		}
+		int totalBases = singles + (doubles*DOUBLE.numberOfBases) + (triples*TRIPLE.numberOfBases) + (homeruns*HOMERUN.numberOfBases);
+		
+		return totalBases;
+	}
+}
