@@ -125,7 +125,7 @@ public class DisplayPoliticianResults {
 				{
 					saveAsFavorite = (Button) a.findViewById(com.scottcaruso.mygov.R.id.savefavorite);
 				}
-				if (saveAsFavorite != null)
+				if (saveAsFavorte != null)
 				{
 					saveAsFavorite.setOnClickListener(new View.OnClickListener() {
 						
@@ -178,26 +178,23 @@ public class DisplayPoliticianResults {
 					});
 				};
 				
-				if (removeAsFavorite != null)
-				{
-					removeAsFavorite.setOnClickListener(new View.OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							try {
-								String removedString = SaveFavoritesLocally.removeFromFavorites(currentPolObject.getString("Name"));
-								SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", removedString, false);
-								JSONObject removedObject = new JSONObject(removedString);
-								showPoliticiansInMainView(removedObject, true);
-								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), currentPolObject.getString("Name")+" has been removed from your favorites.", Toast.LENGTH_LONG);
-								toast.show();
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+				removeAsFavorite.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						try {
+							String removedString = SaveFavoritesLocally.removeFromFavorites(currentPolObject.getString("Name"));
+							SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", removedString, false);
+							JSONObject removedObject = new JSONObject(removedString);
+							showPoliticiansInMainView(removedObject, true);
+							Toast toast = Toast.makeText(MainActivity.getCurrentContext(), currentPolObject.getString("Name")+" has been removed from your favorites.", Toast.LENGTH_LONG);
+							toast.show();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-					});
-				}
+					}
+				});
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

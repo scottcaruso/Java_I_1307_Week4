@@ -1,6 +1,5 @@
 package com.scottcaruso.mygov;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.scottcaruso.datafunctions.RetrieveDataFromSunlightLabs;
@@ -65,7 +64,7 @@ public class MainActivity extends Activity {
 					savedData = SaveFavoritesLocally.getSavedPols();
 					JSONObject savedDataObject = new JSONObject(savedData);
 					DisplayPoliticianResults.showPoliticiansInMainView(savedDataObject, true);
-				} catch (JSONException e) {
+				} catch (Exception e) {
 					Toast toast = Toast.makeText(MainActivity.this, "There are no politicians saved to storage.", Toast.LENGTH_LONG);
 					toast.show();
 				}

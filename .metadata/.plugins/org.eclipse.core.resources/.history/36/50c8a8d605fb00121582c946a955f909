@@ -125,7 +125,7 @@ public class DisplayPoliticianResults {
 				{
 					saveAsFavorite = (Button) a.findViewById(com.scottcaruso.mygov.R.id.savefavorite);
 				}
-				if (saveAsFavorite != null)
+				if (saveAsFavorte != null)
 				{
 					saveAsFavorite.setOnClickListener(new View.OnClickListener() {
 						

@@ -32,8 +32,6 @@ public class DisplayPoliticianResults {
 	static TextView polWebsite = null;
 	static JSONArray polsToDisplay;
 	static JSONObject currentPolObject;
-	static Button saveAsFavorite;
-	static Button removeAsFavorite;
 	
 	public static void showPoliticiansInMainView(final JSONObject pols, Boolean favorites)
 	{
@@ -80,8 +78,8 @@ public class DisplayPoliticianResults {
 								JSONObject savedDataObject = new JSONObject(savedData);
 								DisplayPoliticianResults.showPoliticiansInMainView(savedDataObject, true);
 							} catch (Exception e) {
-								//Toast toast = Toast.makeText(currentMainContext, "There are no politicians saved to storage.", Toast.LENGTH_LONG);
-								//toast.show();
+								Toast toast = Toast.makeText(currentMainContext, "There are no politicians saved to storage.", Toast.LENGTH_LONG);
+								toast.show();
 							}
 						}
 					});
@@ -119,85 +117,83 @@ public class DisplayPoliticianResults {
 			});
 				if (favorites)
 				{
-					removeAsFavorite = (Button) a.findViewById(com.scottcaruso.mygov.R.id.savefavorite);
+					Button removeAsFavorite = (Button) a.findViewById(com.scottcaruso.mygov.R.id.savefavorite);
 					removeAsFavorite.setHint("Remove From Favoirtes");
 				} else
 				{
-					saveAsFavorite = (Button) a.findViewById(com.scottcaruso.mygov.R.id.savefavorite);
+					Button saveAsFavorite = (Button) a.findViewById(com.scottcaruso.mygov.R.id.savefavorite);
 				}
-				if (saveAsFavorite != null)
-				{
-					saveAsFavorite.setOnClickListener(new View.OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							String savedData  = SaveFavoritesLocally.getSavedPols();
-							String masterObjectString = "";
-							if (savedData == null)
+				
+				
+				saveAsFavorite.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						String savedData  = SaveFavoritesLocally.getSavedPols();
+						String masterObjectString = "";
+						if (savedData == null)
+						{
+							JSONArray dataArray = new JSONArray();
+							JSONObject polObject;
+							JSONObject masterObject = new JSONObject();
+							try {
+								polObject = new JSONObject(currentPolObject.toString());
+							} catch (JSONException e) {
+								polObject = null;
+								e.printStackTrace();
+							}
+							dataArray.put(polObject);
+							try {
+								masterObject.put("Politicians", dataArray);
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+							masterObjectString = masterObject.toString();
+							SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
+							Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "This politician has been saved to your favorites!", Toast.LENGTH_LONG);
+							toast.show();
+						} else
+						{
+							Boolean isThisItemAlreadySaved = false;
+							try {
+								isThisItemAlreadySaved = SaveFavoritesLocally.determineIfAlreadySaved(savedData,currentPolObject.getString("Name"));
+							} catch (JSONException e1) {
+								e1.printStackTrace();
+							}
+							if (isThisItemAlreadySaved)
 							{
-								JSONArray dataArray = new JSONArray();
-								JSONObject polObject;
-								JSONObject masterObject = new JSONObject();
-								try {
-									polObject = new JSONObject(currentPolObject.toString());
-								} catch (JSONException e) {
-									polObject = null;
-									e.printStackTrace();
-								}
-								dataArray.put(polObject);
-								try {
-									masterObject.put("Politicians", dataArray);
-								} catch (JSONException e) {
-									e.printStackTrace();
-								}
-								masterObjectString = masterObject.toString();
-								SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
-								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "This politician has been saved to your favorites!", Toast.LENGTH_LONG);
+								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "You have already saved this politician!", Toast.LENGTH_LONG);
 								toast.show();
 							} else
 							{
-								Boolean isThisItemAlreadySaved = false;
-								try {
-									isThisItemAlreadySaved = SaveFavoritesLocally.determineIfAlreadySaved(savedData,currentPolObject.getString("Name"));
-								} catch (JSONException e1) {
-									e1.printStackTrace();
-								}
-								if (isThisItemAlreadySaved)
-								{
-									Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "You have already saved this politician!", Toast.LENGTH_LONG);
-									toast.show();
-								} else
-								{
-									masterObjectString = SaveFavoritesLocally.appendNewDataToExistingString(savedData, currentPolObject.toString());
-									SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
-									Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "This politician has been saved to your favorites!", Toast.LENGTH_LONG);
-									toast.show();
-								}
-							}
-						}
-					});
-				};
-				
-				if (removeAsFavorite != null)
-				{
-					removeAsFavorite.setOnClickListener(new View.OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							try {
-								String removedString = SaveFavoritesLocally.removeFromFavorites(currentPolObject.getString("Name"));
-								SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", removedString, false);
-								JSONObject removedObject = new JSONObject(removedString);
-								showPoliticiansInMainView(removedObject, true);
-								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), currentPolObject.getString("Name")+" has been removed from your favorites.", Toast.LENGTH_LONG);
+								masterObjectString = SaveFavoritesLocally.appendNewDataToExistingString(savedData, currentPolObject.toString());
+								SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
+								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "This politician has been saved to your favorites!", Toast.LENGTH_LONG);
 								toast.show();
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
 							}
 						}
-					});
-				}
+					}
+				});
+				
+				/*removeAsFavorite.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						try {
+							String removedString = SaveFavoritesLocally.removeFromFavorites(thisPol.getString("Name"));
+							SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", removedString, false);
+							JSONObject removedObject = new JSONObject(removedString);
+							showPoliticiansInMainView(removedObject, true);
+							Toast toast = Toast.makeText(MainActivity.getCurrentContext(), thisPol.getString("Name")+" has been removed from your favorites.", Toast.LENGTH_LONG);
+							toast.show();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+			}*/
+			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
