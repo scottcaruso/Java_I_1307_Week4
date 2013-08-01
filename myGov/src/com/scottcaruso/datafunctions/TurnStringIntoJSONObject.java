@@ -45,7 +45,7 @@ public class TurnStringIntoJSONObject {
 					parsedPoliticianObject.put("Website", thisWebsite);
 					parsedPoliticians.put(parsedPoliticianObject);	
 				}
-				JSONObject politicians = new JSONObject().put("politicians", parsedPoliticians);
+				JSONObject politicians = new JSONObject().put("Politicians", parsedPoliticians);
 				return politicians;
 			}
 			

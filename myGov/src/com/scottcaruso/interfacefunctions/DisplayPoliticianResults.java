@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.hardware.Camera.Area;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,10 +21,10 @@ import com.scottcaruso.mygov.MainActivity;
 
 public class DisplayPoliticianResults {
 
-	public static void showPoliticiansInMainView(JSONObject pols)
+	public static void showPoliticiansInMainView(JSONObject pols, Boolean favorites)
 	{
 		try {
-			JSONArray polsToDisplay = pols.getJSONArray("politicians");
+			JSONArray polsToDisplay = pols.getJSONArray("Politicians");
 			LinearLayout currentMainLayout = MainActivity.getMainLayout();
 			currentMainLayout.removeAllViews();
 			Context currentMainContext = MainActivity.getCurrentContext();
@@ -76,6 +77,7 @@ public class DisplayPoliticianResults {
 				websiteLayout.addView(polWebsiteLabel);
 				websiteLayout.addView(polWebsite);
 				
+				Button removeAsFavorite = UIElementCreator.createButton(currentMainContext, "Remove Politician As Favorite", x);
 				Button saveAsFavorite = UIElementCreator.createButton(currentMainContext, "Save Politician As Favorite", x);
 				
 				saveAsFavorite.setOnClickListener(new View.OnClickListener() {
@@ -130,9 +132,15 @@ public class DisplayPoliticianResults {
 				thisPoliticianName.addView(termLayout);
 				thisPoliticianName.addView(twitterLayout);
 				thisPoliticianName.addView(websiteLayout);
-				thisPoliticianName.addView(saveAsFavorite);
-
-				currentMainLayout.addView(thisPoliticianName);
+				if (favorites)
+				{
+					thisPoliticianName.addView(removeAsFavorite);
+					currentMainLayout.addView(thisPoliticianName);
+				} else
+				{
+					thisPoliticianName.addView(saveAsFavorite);
+					currentMainLayout.addView(thisPoliticianName);
+				}
 			}
 			
 		} catch (JSONException e) {
