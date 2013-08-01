@@ -29,13 +29,13 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(R.layout.mainscreen);
+        setContentView(R.layout.main_screen);
         
         //Allows the context to be passed across classes.
         setCurrentContext(MainActivity.this);
         
         final EditText zipEntry = (EditText) findViewById(R.id.zipcodeentry);
-        final Button searchForPolsButton = (Button) findViewByID(R.id.dosearchnow);
+        Button searchForPolsButton = (Button) findViewById(R.id.dosearchnow);
         
         searchForPolsButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 			}
 		});
         
-        final Button retrieveSavedPols = UIElementCreator.createButton(this, "Retrieve Saved Politicians", 1);
+        final Button retrieveSavedPols = (Button) findViewById(R.id.retrievefavorites);
         retrieveSavedPols.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -82,7 +82,6 @@ public class MainActivity extends Activity {
 	{
 		return currentContext;
 	}
-
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {

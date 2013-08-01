@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">myGov</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="enter_zip">Enter Zip</string>
+    <string name="search_now">Search Now</string>
+    <string name="view_saved_politicians">View Saved Politicians</string>
+    <string name="back">Back</string>
+    <string name="results">Results</string>
+    <string name="politician_name">Placeholder Name</string>
+    <string name="political_party_">Political Party:</string>
+
+</resources>

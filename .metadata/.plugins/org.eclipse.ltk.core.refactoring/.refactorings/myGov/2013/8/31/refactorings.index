@@ -1,3 +1,18 @@
 1375384175052	Extracts string 'Enter Zip' into R.string.enter_zip
 1375384193218	Extracts string 'Search Now' into R.string.search_now
 1375386091433	Extracts string 'View Saved Politicians' into R.string.view_saved_politicians
+1375388402202	Delete element
+1375388413256	Rename resource 'mainscreen.xml'
+1375388590484	Extracts string 'Back' into R.string.back
+1375388753512	Extracts string 'Results' into R.string.results
+1375390033296	Extracts string 'Politician Name' into R.string.politician_name
+1375390449579	Extracts string 'Political Party:' into R.string.political_party_
+1375390454862	Extracts string 'Placeholder' into R.string.placeholder
+1375391548881	Extracts string 'State:' into R.string.state_
+1375391588138	Extracts string 'Placeholder State' into R.string.placeholder_state
+1375391730874	Extracts string 'Placeholder Term' into R.string.placeholder_term
+1375391738452	Extracts string 'Term Started' into R.string.term_started
+1375391788008	Extracts string 'Twitter Handle:' into R.string.twitter_handle_
+1375391793277	Extracts string 'Placeholder Twitter' into R.string.placeholder_twitter
+1375391855829	Extracts string 'Placeholder website' into R.string.placeholder_website
+1375391874735	Extracts string 'Website: ' into R.string.website_

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+	    <Button
+	        android:id="@+id/back"
+	        style="@android:style/Widget.Holo.Button.Inset"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/back" />
+	
+	    <TextView
+	        android:id="@+id/foundpoliticians"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:gravity="center"
+	        android:hint="@string/results"
+	        android:textStyle="bold"
+	        android:textSize="30sp" />
+	    
+    </LinearLayout>
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/politicianName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:hint="@string/politician_name"
+            android:textSize="20sp" />
+        
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	        
+	        <TextView
+	            android:id="@+id/partylabel"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:hint="@string/political_party_"
+	            android:textSize="15sp" />
+	        
+	        <TextView
+	            android:id="@+id/partytext"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:hint="@string/placeholder"
+	            android:textSize="15sp" />
+   
+	    </LinearLayout>
+            
+    </ViewFlipper>
+    
+final TextView polLabel = UIElementCreator.createLabel(currentMainContext, "Politician Name: ");
+				final TextView polPartyLabel = UIElementCreator.createLabel(currentMainContext, "Party Affiliaition: ");
+				final TextView polStateLabel = UIElementCreator.createLabel(currentMainContext, "From State: ");
+				final TextView polTermLabel = UIElementCreator.createLabel(currentMainContext, "Term Started: ");
+				final TextView polTwitterLabel = UIElementCreator.createLabel(currentMainContext, "Twitter Handle: ");
+				final TextView polWebsiteLabel = UIElementCreator.createLabel(currentMainContext, "Website Address: ");
+				
+				final TextView polName = UIElementCreator.createLabel(currentMainContext,thisPol.getString("Name"));
+				final TextView polParty = UIElementCreator.createLabel(currentMainContext, thisPol.getString("Party"));
+				final TextView polState = UIElementCreator.createLabel(currentMainContext, thisPol.getString("State"));
+				final TextView polTerm = UIElementCreator.createLabel(currentMainContext, thisPol.getString("Term Start"));
+				final TextView polTwitter = UIElementCreator.createLabel(currentMainContext, thisPol.getString("Twitter"));
+				final TextView polWebsite = UIElementCreator.createLabel(currentMainContext, thisPol.getString("Website"));
+    
+</LinearLayout>
