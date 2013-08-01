@@ -1,5 +1,7 @@
 package com.scottcaruso.interfacefunctions;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,8 +9,12 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,13 +24,21 @@ import com.scottcaruso.mygov.MainActivity;
 import com.scottcaruso.utilities.Connection_Verification;
 
 public class DisplayPoliticianResults {
-
+	
+	static TextView polParty = null;
+	static TextView polState = null;
+	static TextView polTerm = null;
+	static TextView polTwitter = null;
+	static TextView polWebsite = null;
+	static JSONArray polsToDisplay;
+	static JSONObject currentPolObject;
+	
 	public static void showPoliticiansInMainView(final JSONObject pols, Boolean favorites)
 	{
 		final Context currentMainContext = MainActivity.getCurrentContext();
 		final Activity a = (Activity) currentMainContext;
 		try {
-			JSONArray polsToDisplay = pols.getJSONArray("Politicians");
+			polsToDisplay = pols.getJSONArray("Politicians");
 			a.setContentView(com.scottcaruso.mygov.R.layout.politician_display);
 			Button backButton = (Button) a.findViewById(com.scottcaruso.mygov.R.id.back);
 			backButton.setOnClickListener(new View.OnClickListener() {
@@ -71,24 +85,36 @@ public class DisplayPoliticianResults {
 					});
 				}
 			});
+			final Spinner polName = (Spinner) a.findViewById(com.scottcaruso.mygov.R.id.politicianName);
+			polParty = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.partytext);
+			polState = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.statetext);
+			polTerm = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.termText);
+			polTwitter = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.twitterText);
+			polWebsite = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.websiteText);
+			ArrayList<String> politicianNames = new ArrayList<String>();
 			for (int x = 0; x < polsToDisplay.length(); x++)
 			{
-				final JSONObject thisPol = polsToDisplay.getJSONObject(x);
-;				
-				final TextView polName = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.politicianName);
-				polName.setText(thisPol.getString("Name"));
-				final TextView polParty = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.partytext);
-				polParty.setText(thisPol.getString("Party"));
-				final TextView polState = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.statetext);
-				polState.setText(thisPol.getString("State"));
-				final TextView polTerm = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.termText);
-				polTerm.setText(thisPol.getString("Term Start"));
-				final TextView polTwitter = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.twitterText);
-				polTwitter.setText(thisPol.getString("Twitter"));
-				final TextView polWebsite = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.websiteText);
-				polWebsite.setText(thisPol.getString("Website"));
-				
-				//Button removeAsFavorite = UIElementCreator.createButton(currentMainContext, "Remove Politician As Favorite", x);
+				JSONObject thisPol = polsToDisplay.getJSONObject(x);
+				String thisPolName = thisPol.getString("Name");
+				politicianNames.add(thisPolName);
+			}
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(currentMainContext, android.R.layout.simple_spinner_item, politicianNames);
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			polName.setAdapter(adapter);
+			polName.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					int selectedSpinnerItem = arg2;
+					setDisplayItemsBasedOnSpinner(selectedSpinnerItem);		
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					//DO NOTHING
+				}
+			});
 				Button saveAsFavorite = (Button) a.findViewById(com.scottcaruso.mygov.R.id.savefavorite);
 				
 				saveAsFavorite.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +129,7 @@ public class DisplayPoliticianResults {
 							JSONObject polObject;
 							JSONObject masterObject = new JSONObject();
 							try {
-								polObject = new JSONObject(thisPol.toString());
+								polObject = new JSONObject(currentPolObject.toString());
 							} catch (JSONException e) {
 								polObject = null;
 								e.printStackTrace();
@@ -122,7 +148,7 @@ public class DisplayPoliticianResults {
 						{
 							Boolean isThisItemAlreadySaved = false;
 							try {
-								isThisItemAlreadySaved = SaveFavoritesLocally.determineIfAlreadySaved(savedData,thisPol.getString("Name"));
+								isThisItemAlreadySaved = SaveFavoritesLocally.determineIfAlreadySaved(savedData,currentPolObject.getString("Name"));
 							} catch (JSONException e1) {
 								e1.printStackTrace();
 							}
@@ -132,7 +158,7 @@ public class DisplayPoliticianResults {
 								toast.show();
 							} else
 							{
-								masterObjectString = SaveFavoritesLocally.appendNewDataToExistingString(savedData, thisPol.toString());
+								masterObjectString = SaveFavoritesLocally.appendNewDataToExistingString(savedData, currentPolObject.toString());
 								SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
 								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "This politician has been saved to your favorites!", Toast.LENGTH_LONG);
 								toast.show();
@@ -157,14 +183,29 @@ public class DisplayPoliticianResults {
 							e.printStackTrace();
 						}
 					}
-				});*/
-			}
+				});
+			}*/
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+	}
+
+	public static void setDisplayItemsBasedOnSpinner(int selectedSpinner)
+	{
+		try {
+			JSONObject thisPol = polsToDisplay.getJSONObject(selectedSpinner);
+			polParty.setText(thisPol.getString("Party"));
+			polState.setText(thisPol.getString("State"));
+			polTerm.setText(thisPol.getString("Term Start"));
+			polTwitter.setText(thisPol.getString("Twitter"));
+			polWebsite.setText(thisPol.getString("Website"));
+			currentPolObject = thisPol;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
