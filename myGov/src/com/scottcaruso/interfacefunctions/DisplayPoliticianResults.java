@@ -27,15 +27,15 @@ public class DisplayPoliticianResults {
 	{
 		try {
 			JSONArray polsToDisplay = pols.getJSONArray("Politicians");
-			final LinearLayout currentMainLayout = MainActivity.getMainLayout();
-			currentMainLayout.removeAllViews();
+			//final LinearLayout currentMainLayout = MainActivity.getMainLayout();
+			//currentMainLayout.removeAllViews();
 			Context currentMainContext = MainActivity.getCurrentContext();
 			Button backButton = UIElementCreator.createButton(MainActivity.getCurrentContext(), "Back", 9);
 			backButton.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					currentMainLayout.removeAllViews();
+					//currentMainLayout.removeAllViews();
 					final EditText zipEntry = UIElementCreator.createTextEntryField(MainActivity.getCurrentContext(), "Enter Any U.S. Zip Code");
 			        final Button searchForPolsButton = UIElementCreator.createButton(MainActivity.getCurrentContext(), "Search for Politicians", 1);
 			        
@@ -72,12 +72,12 @@ public class DisplayPoliticianResults {
 							}
 						}
 					});
-			        currentMainLayout.addView(zipEntry);
-			        currentMainLayout.addView(searchForPolsButton);
-			        currentMainLayout.addView(retrieveSavedPols);
+			        //currentMainLayout.addView(zipEntry);
+			        //currentMainLayout.addView(searchForPolsButton);
+			        //currentMainLayout.addView(retrieveSavedPols);
 				}
 			});
-			currentMainLayout.addView(backButton);
+			//currentMainLayout.addView(backButton);
 			for (int x = 0; x < polsToDisplay.length(); x++)
 			{
 				LinearLayout thisPoliticianName = new LinearLayout(currentMainContext);
@@ -203,11 +203,11 @@ public class DisplayPoliticianResults {
 				if (favorites)
 				{
 					thisPoliticianName.addView(removeAsFavorite);
-					currentMainLayout.addView(thisPoliticianName);
+					//currentMainLayout.addView(thisPoliticianName);
 				} else
 				{
 					thisPoliticianName.addView(saveAsFavorite);
-					currentMainLayout.addView(thisPoliticianName);
+					//currentMainLayout.addView(thisPoliticianName);
 				}
 			}
 			

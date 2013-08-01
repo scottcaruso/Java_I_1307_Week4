@@ -22,9 +22,6 @@ import android.widget.LinearLayout.LayoutParams;
 
 public class MainActivity extends Activity {
 	
-	static LinearLayout mainLayout;
-
-	static LayoutParams mainLayoutParams;
 	static Context currentContext;
 
 
@@ -32,12 +29,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        setContentView(R.layout.mainscreen);
+        
         //Allows the context to be passed across classes.
         setCurrentContext(MainActivity.this);
-        
-        mainLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-        mainLayout = new LinearLayout(this);
-        mainLayout.setOrientation(LinearLayout.VERTICAL);
         
         final EditText zipEntry = UIElementCreator.createTextEntryField(this, "Enter Any U.S. Zip Code");
         final Button searchForPolsButton = UIElementCreator.createButton(this, "Search for Politicians", 1);
@@ -76,22 +71,7 @@ public class MainActivity extends Activity {
 			}
 		});
         
-        mainLayout.addView(zipEntry);
-        mainLayout.addView(searchForPolsButton);
-        mainLayout.addView(retrieveSavedPols);
-       
-        setContentView(mainLayout);
     }
-
-
-    public static LinearLayout getMainLayout() {
-		return mainLayout;
-	}
-
-
-	public static void setMainLayout(LinearLayout mainLayout) {
-		MainActivity.mainLayout = mainLayout;
-	}
 	
 	public static void setCurrentContext (Context context)
 	{
