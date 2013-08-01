@@ -34,8 +34,8 @@ public class MainActivity extends Activity {
         //Allows the context to be passed across classes.
         setCurrentContext(MainActivity.this);
         
-        final EditText zipEntry = (EditText) findViewById(R.id.zipcodeentry);
-        final Button searchForPolsButton = (Button) findViewByID(R.id.dosearchnow);
+        final EditText zipEntry = (Button) findViewById(R.id.zipcodeentry));
+        final Button searchForPolsButton = (Button) findViewByID.(R.id.dosearchnow)
         
         searchForPolsButton.setOnClickListener(new View.OnClickListener() {
 			

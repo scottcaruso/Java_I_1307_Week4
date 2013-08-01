@@ -34,8 +34,8 @@ public class MainActivity extends Activity {
         //Allows the context to be passed across classes.
         setCurrentContext(MainActivity.this);
         
-        final EditText zipEntry = (EditText) findViewById(R.id.zipcodeentry);
-        final Button searchForPolsButton = (Button) findViewByID(R.id.dosearchnow);
+        final EditText zipEntry = (Button findViewById(R.layout.mainscreen));
+        final Button searchForPolsButton = UIElementCreator.createButton(this, "Search for Politicians", 1);
         
         searchForPolsButton.setOnClickListener(new View.OnClickListener() {
 			

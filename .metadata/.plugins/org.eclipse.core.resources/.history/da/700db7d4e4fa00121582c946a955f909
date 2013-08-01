@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
         setCurrentContext(MainActivity.this);
         
         final EditText zipEntry = (EditText) findViewById(R.id.zipcodeentry);
-        final Button searchForPolsButton = (Button) findViewByID(R.id.dosearchnow);
+        final Button searchForPolsButton = (Button) findViewByID.(R.id.dosearchnow);
         
         searchForPolsButton.setOnClickListener(new View.OnClickListener() {
 			
