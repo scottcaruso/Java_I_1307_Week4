@@ -107,7 +107,6 @@ public class SaveFavoritesLocally {
 		String thisPol;
 		try {
 			thisPol = savedPols.get("Politician").toString();
-			JSONObject savedPolObject = new JSONObject(thisPol);
 			Log.i("Test:",thisPol);	
 		} catch (Exception e) {
 			Log.i("Test:","No valid politicans found.");		

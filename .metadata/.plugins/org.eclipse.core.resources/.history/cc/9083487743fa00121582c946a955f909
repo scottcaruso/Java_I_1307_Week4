@@ -18,9 +18,8 @@ public class TurnStringIntoJSONObject {
 			JSONArray resultsArray = responseObject.getJSONArray("results");
 			if (resultsArray.isNull(0))
 			{
-				Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "You have entered an invalid zip code. Please try again.", Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(MainActivity.this, "You have entered an invalid zip code. Please try again.", Toast.LENGTH_LONG);
 				toast.show();
-				return null;
 			} else
 			{
 				JSONArray parsedPoliticians = new JSONArray();
@@ -49,7 +48,6 @@ public class TurnStringIntoJSONObject {
 				}
 				JSONObject politicians = new JSONObject().put("politicians", parsedPoliticians);
 				return politicians;
-			}
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

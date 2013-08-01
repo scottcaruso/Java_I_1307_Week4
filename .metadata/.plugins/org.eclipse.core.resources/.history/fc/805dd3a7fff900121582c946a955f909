@@ -15,7 +15,6 @@ import org.json.JSONObject;
 import com.scottcaruso.mygov.MainActivity;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 public class SaveFavoritesLocally {
@@ -99,21 +98,6 @@ public class SaveFavoritesLocally {
 			data.put("Politicians", "None");
 		}
 		return data;
-	}
-	
-	public static Boolean determineIfAlreadySaved()
-	{
-		HashMap <String, String> savedPols = SaveFavoritesLocally.getSavedPols();
-		String thisPol;
-		try {
-			thisPol = savedPols.get("Politician").toString();
-			JSONObject savedPolObject = new JSONObject(thisPol);
-			Log.i("Test:",thisPol);	
-		} catch (Exception e) {
-			Log.i("Test:","No valid politicans found.");		
-		}
-		
-		return true;
 	}
 	
 }
