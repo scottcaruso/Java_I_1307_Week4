@@ -28,15 +28,6 @@ public class DisplayPoliticianResults {
 			final LinearLayout currentMainLayout = MainActivity.getMainLayout();
 			currentMainLayout.removeAllViews();
 			Context currentMainContext = MainActivity.getCurrentContext();
-			Button backButton = UIElementCreator.createButton(MainActivity.getCurrentContext(), "Back", 9);
-			backButton.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					currentMainLayout.addView(MainActivity.getDefaultLayout());
-				}
-			});
-			currentMainLayout.addView(backButton);
 			for (int x = 0; x < polsToDisplay.length(); x++)
 			{
 				LinearLayout thisPoliticianName = new LinearLayout(currentMainContext);
@@ -150,6 +141,15 @@ public class DisplayPoliticianResults {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+					}
+				});
+				
+				Button backButton = UIElementCreator.createButton(MainActivity.getCurrentContext(), "Back", 9);
+				backButton.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						currentMainLayout.addView(MainActivity.getDefaultLayout());
 					}
 				});
 				

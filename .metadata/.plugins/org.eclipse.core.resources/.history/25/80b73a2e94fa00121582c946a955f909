@@ -36,7 +36,6 @@ public class DisplayPoliticianResults {
 					currentMainLayout.addView(MainActivity.getDefaultLayout());
 				}
 			});
-			currentMainLayout.addView(backButton);
 			for (int x = 0; x < polsToDisplay.length(); x++)
 			{
 				LinearLayout thisPoliticianName = new LinearLayout(currentMainContext);
