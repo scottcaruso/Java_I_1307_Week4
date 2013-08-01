@@ -79,6 +79,8 @@ public class MainActivity extends Activity {
         mainLayout.addView(zipEntry);
         mainLayout.addView(searchForPolsButton);
         mainLayout.addView(retrieveSavedPols);
+        
+        setDefaultLayout(mainLayout);
        
         setContentView(mainLayout);
     }

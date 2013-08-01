@@ -72,9 +72,6 @@ public class DisplayPoliticianResults {
 							}
 						}
 					});
-			        currentMainLayout.addView(zipEntry);
-			        currentMainLayout.addView(searchForPolsButton);
-			        currentMainLayout.addView(retrieveSavedPols);
 				}
 			});
 			currentMainLayout.addView(backButton);

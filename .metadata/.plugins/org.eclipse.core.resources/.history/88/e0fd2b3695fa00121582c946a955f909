@@ -23,9 +23,18 @@ import android.widget.LinearLayout.LayoutParams;
 public class MainActivity extends Activity {
 	
 	static LinearLayout mainLayout;
+	static LinearLayout defaultLayout;
 
 	static LayoutParams mainLayoutParams;
 	static Context currentContext;
+	
+	public static LinearLayout getDefaultLayout() {
+		return defaultLayout;
+	}
+
+	public static void setDefaultLayout(LinearLayout defaultLayout) {
+		MainActivity.defaultLayout = defaultLayout;
+	}
 
 
     @Override
@@ -79,6 +88,8 @@ public class MainActivity extends Activity {
         mainLayout.addView(zipEntry);
         mainLayout.addView(searchForPolsButton);
         mainLayout.addView(retrieveSavedPols);
+        
+        setDefaultLayout(mainLayout);
        
         setContentView(mainLayout);
     }

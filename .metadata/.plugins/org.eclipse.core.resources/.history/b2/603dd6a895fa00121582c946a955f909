@@ -43,20 +43,20 @@ public class DisplayPoliticianResults {
 						
 						@Override
 						public void onClick(View v) {
-							Boolean connected = Connection_Verification.areWeConnected(MainActivity.getCurrentContext());
+							Boolean connected = Connection_Verification.areWeConnected(MainActivity.this);
 							if (connected)
 							{
 								String enteredZip = zipEntry.getText().toString();
 								RetrieveDataFromSunlightLabs.retrieveData("http://congress.api.sunlightfoundation.com/legislators/locate?zip="+enteredZip+"&apikey=eab4e1dfef1e467b8a25ed1eab0f7544");
 							} else
 							{
-								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "There is no connection to the internet available. Please try again later, or view saved politicians.", Toast.LENGTH_LONG);
+								Toast toast = Toast.makeText(MainActivity.this, "There is no connection to the internet available. Please try again later, or view saved politicians.", Toast.LENGTH_LONG);
 								toast.show();
 							}
 						}
 					});
 			        
-			        final Button retrieveSavedPols = UIElementCreator.createButton(MainActivity.getCurrentContext(), "Retrieve Saved Politicians", 1);
+			        final Button retrieveSavedPols = UIElementCreator.createButton(this, "Retrieve Saved Politicians", 1);
 			        retrieveSavedPols.setOnClickListener(new View.OnClickListener() {
 						
 						@Override
@@ -67,14 +67,11 @@ public class DisplayPoliticianResults {
 								JSONObject savedDataObject = new JSONObject(savedData);
 								DisplayPoliticianResults.showPoliticiansInMainView(savedDataObject, true);
 							} catch (Exception e) {
-								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "There are no politicians saved to storage.", Toast.LENGTH_LONG);
+								Toast toast = Toast.makeText(MainActivity.this, "There are no politicians saved to storage.", Toast.LENGTH_LONG);
 								toast.show();
 							}
 						}
 					});
-			        currentMainLayout.addView(zipEntry);
-			        currentMainLayout.addView(searchForPolsButton);
-			        currentMainLayout.addView(retrieveSavedPols);
 				}
 			});
 			currentMainLayout.addView(backButton);
