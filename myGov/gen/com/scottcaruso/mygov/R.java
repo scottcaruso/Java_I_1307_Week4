@@ -25,7 +25,7 @@ public final class R {
         public static final int mygov_icon=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f080015;
+        public static final int action_settings=0x7f080016;
         public static final int back=0x7f080003;
         public static final int dosearchnow=0x7f080001;
         public static final int foundpoliticians=0x7f080004;
@@ -34,6 +34,7 @@ public final class R {
         public static final int partytext=0x7f080008;
         public static final int politicianName=0x7f080005;
         public static final int retrievefavorites=0x7f080002;
+        public static final int savefavorite=0x7f080015;
         public static final int stateLayout=0x7f080009;
         public static final int statelabel=0x7f08000a;
         public static final int statetext=0x7f08000b;
@@ -69,6 +70,7 @@ public final class R {
         public static final int political_party_=0x7f050009;
         public static final int politician_name=0x7f050008;
         public static final int results=0x7f050007;
+        public static final int save_to_favorites=0x7f050013;
         public static final int search_now=0x7f050004;
         public static final int state_=0x7f05000b;
         public static final int term_started=0x7f05000e;

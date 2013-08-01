@@ -116,8 +116,6 @@ public class DisplayPoliticianResults {
 							}
 							masterObjectString = masterObject.toString();
 							SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
-							Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "This politician has been saved to your favorites!", Toast.LENGTH_LONG);
-							toast.show();
 						} else
 						{
 							Boolean isThisItemAlreadySaved = false;
@@ -134,7 +132,7 @@ public class DisplayPoliticianResults {
 							{
 								masterObjectString = SaveFavoritesLocally.appendNewDataToExistingString(savedData, thisPol.toString());
 								SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
-								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "This politician has been saved to your favorites!", Toast.LENGTH_LONG);
+								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), thisPol.getString("Name")+" has been saved to your favorites!", Toast.LENGTH_LONG);
 								toast.show();
 							}
 						}

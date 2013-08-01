@@ -1,20 +1,30 @@
 package com.scottcaruso.interfacefunctions;
 
+import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.anim;
+import android.R.layout;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
+import android.hardware.Camera.Area;
+import android.util.Log;
 import android.view.View;
+import android.widget.AnalogClock;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.scottcaruso.datafunctions.RetrieveDataFromSunlightLabs;
 import com.scottcaruso.datafunctions.SaveFavoritesLocally;
 import com.scottcaruso.mygov.MainActivity;
+import com.scottcaruso.mygov.R;
 import com.scottcaruso.utilities.Connection_Verification;
 
 public class DisplayPoliticianResults {
@@ -88,8 +98,8 @@ public class DisplayPoliticianResults {
 				final TextView polWebsite = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.websiteText);
 				polWebsite.setText(thisPol.getString("Website"));
 				
-				//Button removeAsFavorite = UIElementCreator.createButton(currentMainContext, "Remove Politician As Favorite", x);
-				Button saveAsFavorite = (Button) a.findViewById(com.scottcaruso.mygov.R.id.savefavorite);
+				Button removeAsFavorite = UIElementCreator.createButton(currentMainContext, "Remove Politician As Favorite", x);
+				Button saveAsFavorite = UIElementCreator.createButton(currentMainContext, "Save Politician As Favorite", x);
 				
 				saveAsFavorite.setOnClickListener(new View.OnClickListener() {
 					
@@ -116,8 +126,6 @@ public class DisplayPoliticianResults {
 							}
 							masterObjectString = masterObject.toString();
 							SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
-							Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "This politician has been saved to your favorites!", Toast.LENGTH_LONG);
-							toast.show();
 						} else
 						{
 							Boolean isThisItemAlreadySaved = false;
@@ -134,14 +142,12 @@ public class DisplayPoliticianResults {
 							{
 								masterObjectString = SaveFavoritesLocally.appendNewDataToExistingString(savedData, thisPol.toString());
 								SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", masterObjectString, false);
-								Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "This politician has been saved to your favorites!", Toast.LENGTH_LONG);
-								toast.show();
 							}
 						}
 					}
 				});
 				
-				/*removeAsFavorite.setOnClickListener(new View.OnClickListener() {
+				removeAsFavorite.setOnClickListener(new View.OnClickListener() {
 					
 					@Override
 					public void onClick(View v) {
@@ -157,7 +163,17 @@ public class DisplayPoliticianResults {
 							e.printStackTrace();
 						}
 					}
-				});*/
+				});
+				
+				/*if (favorites)
+				{
+					thisPoliticianName.addView(removeAsFavorite);
+					//currentMainLayout.addView(thisPoliticianName);
+				} else
+				{
+					thisPoliticianName.addView(saveAsFavorite);
+					//currentMainLayout.addView(thisPoliticianName);
+				}*/
 			}
 			
 		} catch (JSONException e) {
