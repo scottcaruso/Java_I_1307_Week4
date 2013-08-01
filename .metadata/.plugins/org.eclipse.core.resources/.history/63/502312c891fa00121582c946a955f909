@@ -141,8 +141,8 @@ public class SaveFavoritesLocally {
 	public static String removeFromFavorites(String name)
 	{
 		String newString;
-		String savedData  = SaveFavoritesLocally.getSavedPols();
 		try {
+			String savedData  = SaveFavoritesLocally.getSavedPols();
 			JSONObject oldObject = new JSONObject(savedData);
 			JSONArray oldArray = oldObject.getJSONArray("Politicians");
 			JSONArray newArray = new JSONArray();
@@ -160,8 +160,8 @@ public class SaveFavoritesLocally {
 			newString = newObject.toString();
 			return newString;
 		} catch (JSONException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return savedData;
 		}
 	
 	}

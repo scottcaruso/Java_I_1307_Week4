@@ -140,29 +140,24 @@ public class SaveFavoritesLocally {
 	
 	public static String removeFromFavorites(String name)
 	{
-		String newString;
 		String savedData  = SaveFavoritesLocally.getSavedPols();
-		try {
-			JSONObject oldObject = new JSONObject(savedData);
-			JSONArray oldArray = oldObject.getJSONArray("Politicians");
-			JSONArray newArray = new JSONArray();
-			for (int x = 0; x < oldArray.length(); x++)
+		JSONObject oldObject = new JSONObject(savedData);
+		JSONArray oldArray = oldObject.getJSONArray("Politicians");
+		JSONArray newArray = new JSONArray();
+		for (int x = 0; x < oldArray.length(); x++)
+		{
+			JSONObject thisObject = oldArray.getJSONObject(x);
+			String thisName = thisObject.getString("Name");
+			if (thisName.equals(name))
 			{
-				JSONObject thisObject = oldArray.getJSONObject(x);
-				String thisName = thisObject.getString("Name");
-				if (!thisName.equals(name))
-				{
-					newArray.put(thisObject);
-				}
+				
 			}
-			JSONObject newObject = new JSONObject();
-			newObject.put("Politicians", newArray);
-			newString = newObject.toString();
-			return newString;
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return savedData;
 		}
-	
+		oldArray.put(newDataObject);
+		JSONObject newObject = new JSONObject();
+		newObject.put("Politicians", oldArray);
+		String newString = newObject.toString();
+		
+		return newString;
 	}
 }

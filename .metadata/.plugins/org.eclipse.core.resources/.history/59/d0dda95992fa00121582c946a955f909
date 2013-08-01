@@ -130,17 +130,10 @@ public class DisplayPoliticianResults {
 					
 					@Override
 					public void onClick(View v) {
-						try {
-							String removedString = SaveFavoritesLocally.removeFromFavorites(thisPol.getString("Name"));
-							SaveFavoritesLocally.saveData(MainActivity.getCurrentContext(), "Politicians", removedString, false);
-							JSONObject removedObject = new JSONObject(removedString);
-							showPoliticiansInMainView(removedObject, true);
-							Toast toast = Toast.makeText(MainActivity.getCurrentContext(), thisPol.getString("Name")+" has been removed from your favorites.", Toast.LENGTH_LONG);
-							toast.show();
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						String removedString = SaveFavoritesLocally.removeFromFavorites(thisPol.getString("Name"));
+						showPoliticiansInMainView(pols, true);
+						Toast toast = Toast.makeText(MainActivity.getCurrentContext(), thisPol.getString("Name")+" has been removed from your favorites.", Toast.LENGTH_LONG);
+						toast.show();
 					}
 				});
 				
