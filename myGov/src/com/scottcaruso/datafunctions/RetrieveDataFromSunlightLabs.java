@@ -1,3 +1,7 @@
+/* Scott Caruso
+ * Java 1 - 1307
+ * Week 4 Project
+ */
 package com.scottcaruso.datafunctions;
 
 import java.io.BufferedInputStream;
@@ -89,6 +93,7 @@ public class RetrieveDataFromSunlightLabs {
 		protected void onPostExecute(String result)
 		{
 			JSONObject parsedObject = TurnStringIntoJSONObject.createMasterObject(result);
+			//Handle if the user has entered an unknown/invalid zip code.
 			if (parsedObject == null)
 			{
 				Toast toast = Toast.makeText(MainActivity.getCurrentContext(), "You have entered an invalid zip code. Please try again.", Toast.LENGTH_LONG);
@@ -97,10 +102,6 @@ public class RetrieveDataFromSunlightLabs {
 			{
 				DisplayPoliticianResults.showPoliticiansInMainView(parsedObject, false);
 			}
-			//HashMap<String, String> polData = new HashMap<String, String>();
-			//polData.put("Politicians", parsedObject.toString());
-			//SaveFavoritesLocally.saveObject(MainActivity.getCurrentContext(), "Test", polData, true);
-			//Log.i("URL_RESPONSE",result);
 		}
 	}
 		

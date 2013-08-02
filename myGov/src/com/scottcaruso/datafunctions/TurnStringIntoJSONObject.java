@@ -1,3 +1,7 @@
+/* Scott Caruso
+ * Java 1 - 1307
+ * Week 4 Project
+ */
 package com.scottcaruso.datafunctions;
 
 import org.json.JSONArray;

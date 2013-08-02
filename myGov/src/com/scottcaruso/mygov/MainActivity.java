@@ -1,3 +1,7 @@
+/* Scott Caruso
+ * Java 1 - 1307
+ * Week 4 Project
+ */
 package com.scottcaruso.mygov;
 
 import org.json.JSONObject;
@@ -24,14 +28,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(R.layout.titlescreen);
-
-        
         setContentView(R.layout.main_screen);
         
         //Allows the context to be passed across classes.
         setCurrentContext(MainActivity.this);
         
+        //Create interface elements from the XML files
         final EditText zipEntry = (EditText) findViewById(R.id.zipcodeentry);
         Button searchForPolsButton = (Button) findViewById(R.id.dosearchnow);
         
@@ -39,6 +41,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				//Verify network connection before attempting to connect to network.
 				Boolean connected = Connection_Verification.areWeConnected(MainActivity.this);
 				if (connected)
 				{
@@ -52,6 +55,7 @@ public class MainActivity extends Activity {
 			}
 		});
         
+        //Click this button to retrieve politicians saved to local storage.
         final Button retrieveSavedPols = (Button) findViewById(R.id.retrievefavorites);
         retrieveSavedPols.setOnClickListener(new View.OnClickListener() {
 			

@@ -1,3 +1,7 @@
+/* Scott Caruso
+ * Java 1 - 1307
+ * Week 4 Project
+ */
 package com.scottcaruso.interfacefunctions;
 
 import java.util.ArrayList;
@@ -35,6 +39,7 @@ public class DisplayPoliticianResults {
 	static Button saveAsFavorite;
 	static Button removeAsFavorite;
 	
+	//Meta view: this creates the view that displays politicians. It uses a Boolean to determine whether or not the user is viewing favorites or live data, so it knows whether to show the Add or Remove button.
 	public static void showPoliticiansInMainView(final JSONObject pols, Boolean favorites)
 	{
 		final Context currentMainContext = MainActivity.getCurrentContext();
@@ -80,19 +85,21 @@ public class DisplayPoliticianResults {
 								JSONObject savedDataObject = new JSONObject(savedData);
 								DisplayPoliticianResults.showPoliticiansInMainView(savedDataObject, true);
 							} catch (Exception e) {
-								//Toast toast = Toast.makeText(currentMainContext, "There are no politicians saved to storage.", Toast.LENGTH_LONG);
-								//toast.show();
+								Toast toast = Toast.makeText(currentMainContext, "There are no politicians saved to storage.", Toast.LENGTH_LONG);
+								toast.show();
 							}
 						}
 					});
 				}
 			});
+			//Assigns the elements used in the view.
 			final Spinner polName = (Spinner) a.findViewById(com.scottcaruso.mygov.R.id.politicianName);
 			polParty = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.partytext);
 			polState = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.statetext);
 			polTerm = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.termText);
 			polTwitter = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.twitterText);
 			polWebsite = (TextView) a.findViewById(com.scottcaruso.mygov.R.id.websiteText);
+			//Creates an array of the received results, and then populates a Spinner View in the Results page.
 			ArrayList<String> politicianNames = new ArrayList<String>();
 			for (int x = 0; x < polsToDisplay.length(); x++)
 			{
@@ -103,6 +110,7 @@ public class DisplayPoliticianResults {
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(currentMainContext, android.R.layout.simple_spinner_item, politicianNames);
 			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			polName.setAdapter(adapter);
+			//Adapter that listens for which spinner item has been clicked.
 			polName.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 				@Override
@@ -205,6 +213,7 @@ public class DisplayPoliticianResults {
 		
 	}
 
+	//Function called by the spinner listener to set the dynamic data appropriately.
 	public static void setDisplayItemsBasedOnSpinner(int selectedSpinner)
 	{
 		try {

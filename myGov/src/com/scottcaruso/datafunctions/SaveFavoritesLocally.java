@@ -1,3 +1,7 @@
+/* Scott Caruso
+ * Java 1 - 1307
+ * Week 4 Project
+ */
 package com.scottcaruso.datafunctions;
 
 import java.io.BufferedInputStream;
@@ -94,6 +98,7 @@ public class SaveFavoritesLocally {
 		}
 	}
 	
+	//This function determines whether or not the currently selected politician already exists in the list so that he/she is not saved again.
 	public static Boolean determineIfAlreadySaved(String politicians, String polName)
 	{
 		try {
@@ -115,6 +120,7 @@ public class SaveFavoritesLocally {
 		return false;
 	}
 	
+	//The below appends new data to the existing data if the user adds a new favorite to his list.
 	public static String appendNewDataToExistingString(String oldData, String newData)
 	{
 		try {
@@ -132,6 +138,7 @@ public class SaveFavoritesLocally {
 		}	
 	}
 	
+	//This function is called when the user clicks the Remove From Favorites option
 	public static String removeFromFavorites(String name)
 	{
 		String newString;
