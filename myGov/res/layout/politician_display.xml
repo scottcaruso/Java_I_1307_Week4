@@ -176,4 +176,11 @@
         android:layout_marginTop="25dp"
         android:hint="@string/save_to_favorites" />
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/mainmenu"
+        android:src="@drawable/mygov_logo" />
+
 </LinearLayout>

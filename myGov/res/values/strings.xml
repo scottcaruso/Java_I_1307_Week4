@@ -21,5 +21,6 @@
     <string name="placeholder_website">Placeholder website</string>
     <string name="website_">"Website: "</string>
     <string name="save_to_favorites">Save To Favorites</string>
+    <string name="mainmenu">Main Menu Title Image</string>
 
 </resources>

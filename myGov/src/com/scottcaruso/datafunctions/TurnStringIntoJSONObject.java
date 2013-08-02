@@ -4,10 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.widget.Toast;
-
-import com.scottcaruso.mygov.MainActivity;
-
 public class TurnStringIntoJSONObject {
 	
 	public static JSONObject createMasterObject(String response)

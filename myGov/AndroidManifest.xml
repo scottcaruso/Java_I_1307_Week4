@@ -15,10 +15,10 @@
         android:allowBackup="true"
         android:icon="@drawable/mygov_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" android:logo="@drawable/mygov_logo">
         <activity
             android:name="com.scottcaruso.mygov.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" android:logo="@drawable/mygov_logo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

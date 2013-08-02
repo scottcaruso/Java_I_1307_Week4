@@ -1,34 +1,31 @@
 package com.scottcaruso.mygov;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.scottcaruso.datafunctions.RetrieveDataFromSunlightLabs;
 import com.scottcaruso.datafunctions.SaveFavoritesLocally;
 import com.scottcaruso.interfacefunctions.DisplayPoliticianResults;
-import com.scottcaruso.interfacefunctions.UIElementCreator;
 import com.scottcaruso.utilities.Connection_Verification;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.widget.LinearLayout.LayoutParams;
 
 public class MainActivity extends Activity {
 	
 	static Context currentContext;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        setContentView(R.layout.titlescreen);
+
         
         setContentView(R.layout.main_screen);
         
@@ -65,7 +62,7 @@ public class MainActivity extends Activity {
 					savedData = SaveFavoritesLocally.getSavedPols();
 					JSONObject savedDataObject = new JSONObject(savedData);
 					DisplayPoliticianResults.showPoliticiansInMainView(savedDataObject, true);
-				} catch (JSONException e) {
+				} catch (Exception e) {
 					Toast toast = Toast.makeText(MainActivity.this, "There are no politicians saved to storage.", Toast.LENGTH_LONG);
 					toast.show();
 				}

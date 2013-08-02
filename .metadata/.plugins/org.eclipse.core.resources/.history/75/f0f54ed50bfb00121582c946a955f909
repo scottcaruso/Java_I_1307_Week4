@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">myGov</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="enter_zip">Enter Zip</string>
+    <string name="search_now">Search Now</string>
+    <string name="view_saved_politicians">View Saved Politicians</string>
+    <string name="back">Back</string>
+    <string name="results">Results</string>
+    <string name="politician_name">Placeholder Name</string>
+    <string name="political_party_">Political Party:</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="state_">State:</string>
+    <string name="placeholder_state">Placeholder State</string>
+    <string name="placeholder_term">Placeholder Term</string>
+    <string name="term_started">Term Started</string>
+    <string name="twitter_handle_">Twitter Handle:</string>
+    <string name="placeholder_twitter">Placeholder Twitter</string>
+    <string name="placeholder_website">Placeholder website</string>
+    <string name="website_">"Website: "</string>
+    <string name="save_to_favorites">Save To Favorites</string>
+    <String name="mainmenu">Main Menu Title Image</String>
+
+</resources>

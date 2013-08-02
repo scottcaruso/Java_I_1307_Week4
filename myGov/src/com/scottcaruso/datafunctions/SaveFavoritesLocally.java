@@ -6,10 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.ObjectOutputStream.PutField;
-import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +15,6 @@ import com.scottcaruso.mygov.MainActivity;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 public class SaveFavoritesLocally {
 		
@@ -86,7 +81,6 @@ public class SaveFavoritesLocally {
 	return savedData;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static String getSavedPols()
 	{
 		String savedData = SaveFavoritesLocally.retrieveSavedString(MainActivity.getCurrentContext(), "Politicians", false);
